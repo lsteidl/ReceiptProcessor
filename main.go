@@ -121,7 +121,8 @@ func calculatePoints(idFromRequest string) int {
 }
 
 /*
-	Processes the requested receipt and sends JSON containing the calculated point value as a response, example: { "points": 32 }
+	Processes the requested receipt
+	Responds to request with JSON containing the calculated point value as a response, example: { "points": 32 }
 
 @param pointer to the Context struct from the GET request
 */
@@ -143,7 +144,7 @@ func getPoints(c *gin.Context) {
 
 /*
 	Processes the JSON info received in the POST request body.
-	Sends a JSON containing a unique identifier as a response, example: {  "id": "ceibu5s3c37hfmrav9q0" }
+	Responds to request with JSON containing a unique identifier as a response, example: {  "id": "ceibu5s3c37hfmrav9q0" }
 
 @param pointer to the Context struct from the POST request
 */
