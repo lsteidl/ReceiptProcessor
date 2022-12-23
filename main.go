@@ -69,8 +69,8 @@ func calculatePoints(idFromRequest string) int {
 	itemCount := len(receipts[idFromRequest].Items)
 	itemPoints = (itemCount / 2) * 5
 
-	//If the trimmed length of the item description is a multiple of 3, multiply the price by 0.2 and round up to the nearest integer.
-	//The result is the number of points earned.
+	// If the trimmed length of the item description is a multiple of 3, multiply the price by 0.2 and round up to the nearest integer.
+	// The result is the number of points earned.
 	for i := 0; i < len(receipts[idFromRequest].Items); i++ { //iterate through each item on the receipt
 		description := receipts[idFromRequest].Items[i].ShortDescription
 		price := receipts[idFromRequest].Items[i].Price
