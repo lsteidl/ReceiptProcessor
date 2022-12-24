@@ -9,7 +9,6 @@ import (
 
 /*
 	Calculates total number of points for each category
-	Calls functions from calculate.go
 
 @param idFromRequest string indicating which receipt to process from receipts map
 @return int value of total rewarded points
@@ -39,9 +38,10 @@ func calculatePoints(idFromRequest string) int {
 */
 func getRetailerPoints(retailer string) int {
 	retailerPoints := 0
-	split := strings.Split(retailer, "") // convert Retailer Name into a slice of strings, 1 letter per index
-	for i := 0; i < len(split); i++ {    // iterate through each letter of the Retailer Name
-		isAlphanumeric := regexp.MustCompile(`^[a-zA-Z0-9]*$`).MatchString(split[i]) // MustCompile parses a regular expression and returns a Regexp object, MatchString compares this object to "split[i]"
+	split := strings.Split(retailer, "")           // convert Retailer Name into a slice of strings, 1 letter per index
+	regExp := regexp.MustCompile(`^[a-zA-Z0-9]*$`) // create Regexp object to compare with
+	for i := 0; i < len(split); i++ {              // iterate through each letter of the Retailer Name
+		isAlphanumeric := regExp.MatchString(split[i]) // MustCompile parses a regular expression and returns a Regexp object, MatchString compares this object to "split[i]"
 		if isAlphanumeric {
 			retailerPoints++
 		}
@@ -58,8 +58,8 @@ func getRetailerPoints(retailer string) int {
 */
 func getRoundPoints(receiptTotal string) int {
 	roundPoints := 0
-	isRoundDollar, err := regexp.MatchString(`^([0-9]*[.]*[0]*)$`, receiptTotal) // determine if receiptTotal matches the definition of "round dollar amount"
-	if isRoundDollar && err == nil {                                             // reward 50 points if string matches
+	isRoundDollar, err := regexp.MatchString(`^([0-9]*.[0]*)$`, receiptTotal) // determine if receiptTotal matches the definition of "round dollar amount"
+	if isRoundDollar && err == nil {                                          // reward 50 points if string matches
 		roundPoints = 50
 	}
 	return roundPoints
