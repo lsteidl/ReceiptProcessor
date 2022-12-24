@@ -12,7 +12,9 @@ import (
 /*
 	Validates JSON Date, Time, Total and each Item's Price
 
-@param pointer to the Context struct from the GET request
+@param newReceipt receipt, the pending receipt addition
+@return bool declaring newReceipt as Valid/Invalid
+@return string defining reason for invalid receipt
 */
 func validate(newReceipt receipt) (bool, string) {
 	purchaseDate := newReceipt.PurchaseDate
