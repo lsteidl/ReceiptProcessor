@@ -23,10 +23,14 @@ How many points should be earned are defined by the rules below.
 
 Data will not survive an application restart.
 
-Example Response:
+Example Responses:
 ```json
 { "id": "cejjcok3c37gg5d2a5r0" }
 ```
+```json
+{ "message": "Error: Invalid Price for Knorr Creamy Chicken (10..26), Invalid Price for Doritos Nacho Cheese (3x.35), Invalid Purchase Date (09-01-22), Invalid Purchase Time (01:00:33), Invalid Purchase Total (9.0s0)" }
+```
+
 
 ## Endpoint: Get Points
 
