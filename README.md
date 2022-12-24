@@ -25,7 +25,7 @@ Data will not survive an application restart.
 
 Example Response:
 ```json
-{ "id": "7fb1377b-b223-49d9-a31a-5a02701dd310" }
+{ "id": "cejjcok3c37gg5d2a5r0" }
 ```
 
 ## Endpoint: Get Points

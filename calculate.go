@@ -8,6 +8,29 @@ import (
 )
 
 /*
+	Calculates total number of points for each category
+	Calls functions from calculate.go
+
+@param idFromRequest string indicating which receipt to process from receipts map
+@return int value of total rewarded points
+*/
+func calculatePoints(idFromRequest string) int {
+	// Retrieve information needed for point calculation
+	retailer := receipts[idFromRequest].Retailer
+	receiptTotal := receipts[idFromRequest].Total
+	itemCount := len(receipts[idFromRequest].Items)
+	items := receipts[idFromRequest].Items
+	purchaseDate := receipts[idFromRequest].PurchaseDate
+	purchaseTime := receipts[idFromRequest].PurchaseTime
+
+	// Add all point categories
+	totalPoints := getRetailerPoints(retailer) + getRoundPoints(receiptTotal) + getMultiplePoints(receiptTotal) +
+		getItemPoints(itemCount) + getDescPoints(items) + getDatePoints(purchaseDate) + getTimePoints(purchaseTime)
+
+	return totalPoints
+}
+
+/*
 	Awards points for retailer name
 	One point for every alphanumeric character in the retailer name.
 
