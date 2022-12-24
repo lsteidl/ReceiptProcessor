@@ -16,11 +16,11 @@ import (
 func calculatePoints(idFromRequest string) int {
 	// Retrieve information needed for point calculation
 	retailer := receipts[idFromRequest].Retailer
-	receiptTotal := receipts[idFromRequest].Total
 	itemCount := len(receipts[idFromRequest].Items)
 	items := receipts[idFromRequest].Items
 	purchaseDate := receipts[idFromRequest].PurchaseDate
 	purchaseTime := receipts[idFromRequest].PurchaseTime
+	receiptTotal := receipts[idFromRequest].Total
 
 	// Add all point categories
 	totalPoints := getRetailerPoints(retailer) + getRoundPoints(receiptTotal) + getMultiplePoints(receiptTotal) +

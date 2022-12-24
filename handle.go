@@ -17,32 +17,33 @@ import (
 func validate(newReceipt receipt) (bool, string) {
 	purchaseDate := newReceipt.PurchaseDate
 	purchaseTime := newReceipt.PurchaseTime
-	purchaseTotal := newReceipt.Total
+	receiptTotal := newReceipt.Total
 	items := newReceipt.Items
 	isValid := true
 	validateResult := "Error: "
 	isValidDate, _ := regexp.MatchString(`^\d{4}\-(0?[1-9]|1[012])\-(0?[1-9]|[12][0-9]|3[01])$`, purchaseDate) // only YYYY-MM-DD or YYYY-M-D are valid
 	isValidTime, _ := regexp.MatchString(`^[0-2][0-3]:[0-5][0-9]$`, purchaseTime)                              // only HH:MM is valid
-	isValidTotal, _ := regexp.MatchString(`(^[0-9]*[.][0-9]*$)|(^[0-9]*$)`, purchaseTotal)                     // only valid forms are 0.0 and 0
+	isValidTotal, _ := regexp.MatchString(`(^[0-9]*[.][0-9]*$)|(^[0-9]*$)`, receiptTotal)                      // only valid forms are 0.0 and 0
 	regExp := regexp.MustCompile(`(^[0-9]*[.][0-9]*$)|(^[0-9]*$)`)
 	for i := 0; i < len(items); i++ {
 		isValidPrice := regExp.MatchString(items[i].Price) // only valid forms are 0.0 and 0
 		if !isValidPrice {
-			validateResult += ("Invalid Price for " + items[i].ShortDescription + ", ")
+			validateResult += ("Invalid Price for " + items[i].ShortDescription +
+				" (" + items[i].Price + "), ")
 			isValid = false
 		}
 		isValidPrice = true
 	}
 	if !isValidDate { // create string containing error information                                                                // determine if receiptTotal has valid format)
-		validateResult += "Invalid Purchase Date, "
+		validateResult += "Invalid Purchase Date (" + purchaseDate + "), "
 		isValid = false
 	}
 	if !isValidTime {
-		validateResult += "Invalid Purchase Time, "
+		validateResult += "Invalid Purchase Time (" + purchaseTime + "), "
 		isValid = false
 	}
 	if !isValidTotal {
-		validateResult += "Invalid Purchase Total"
+		validateResult += "Invalid Purchase Total (" + receiptTotal + ")"
 		isValid = false
 	}
 
